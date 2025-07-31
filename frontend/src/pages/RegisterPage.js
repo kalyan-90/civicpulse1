@@ -1,7 +1,7 @@
 // src/pages/RegisterPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance"; // ✅ using axios interceptor
 
 const RegisterPage = ({ setUser }) => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const RegisterPage = ({ setUser }) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post("/auth/register", {
         name: formData.name,
         email: formData.email.trim().toLowerCase(),
         password: formData.password,
