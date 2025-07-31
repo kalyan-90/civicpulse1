@@ -1,5 +1,6 @@
+// src/pages/SubmitCasePage.js
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance"; // ✅ use interceptor
 
 const SubmitCasePage = ({ user }) => {
   const [title, setTitle] = useState("");
@@ -18,12 +19,9 @@ const SubmitCasePage = ({ user }) => {
     if (image) formData.append("image", image);
 
     try {
-      const token = localStorage.getItem("token"); // ✅ Get token from localStorage
-
-      const res = await axios.post("http://localhost:5000/api/cases", formData, {
+      await axios.post("/cases", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`, // ✅ Set token in header
         },
       });
 
