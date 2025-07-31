@@ -1,7 +1,7 @@
 // src/pages/LoginPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance"; // ✅ use interceptor-based axios
 
 const LoginPage = ({ setUser }) => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const LoginPage = ({ setUser }) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post("/auth/login", {
         email: formData.email.trim().toLowerCase(),
         password: formData.password,
       });
