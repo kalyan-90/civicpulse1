@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const AnalyticsPage = () => {
@@ -11,7 +11,7 @@ const AnalyticsPage = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cases");
+      const res = await axiosInstance.get("/cases");
       const cases = res.data;
 
       // Group by month
