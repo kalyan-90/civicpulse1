@@ -1,16 +1,15 @@
 // src/pages/ProfilePage.js
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance"; // ✅ use interceptor
 
 const ProfilePage = ({ user }) => {
   const [userCases, setUserCases] = useState([]);
 
   const fetchUserCases = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cases");
+      const res = await axios.get("/cases");
       const allCases = res.data;
 
-      // Filter cases submitted by the logged-in user
       const filtered = allCases.filter(
         (c) =>
           c.submittedBy === user._id ||
@@ -52,7 +51,7 @@ const ProfilePage = ({ user }) => {
               <p><strong>Status:</strong> {c.status}</p>
               {c.image && (
                 <img
-                  src={`http://localhost:5000/uploads/${c.image}`}
+                  src={`${axios.defaults.baseURL}/uploads/${c.image}`}
                   alt="Case"
                   className="w-full mt-2 rounded"
                 />
