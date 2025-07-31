@@ -1,8 +1,7 @@
-// src/utils/axiosInstance.js
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://civicpulse1-1.onrender.com/api",  // ✅ updated for deployed backend
+  baseURL: "https://civicpulse1-1.onrender.com/api", // ✅ production backend
 });
 
 instance.interceptors.request.use((config) => {
@@ -14,4 +13,3 @@ instance.interceptors.request.use((config) => {
 });
 
 export default instance;
-
