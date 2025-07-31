@@ -1,10 +1,10 @@
 // src/App.js
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "./utils/axiosInstance";
 
 import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage"; // If needed
+import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import SubmitCasePage from "./pages/SubmitCasePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -32,9 +32,7 @@ function App() {
       }
 
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axiosInstance.get("/auth/me");
         setUser({ ...res.data, token }); // Restore token
       } catch (err) {
         console.error("Auth check failed:", err.message);
@@ -47,7 +45,7 @@ function App() {
   }, []);
 
   const handleLogout = async () => {
-    await axios.post("http://localhost:5000/api/auth/logout");
+    await axiosInstance.post("/auth/logout");
     localStorage.removeItem("user");
     setUser(null);
   };
