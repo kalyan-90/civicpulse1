@@ -1,7 +1,6 @@
 // src/pages/HomePage.js
 import React, { useEffect, useState } from "react";
-import axios from "../utils/axiosInstance"; // ✅ using interceptor
-// ^ make sure this file is created below
+import axios from "../utils/axiosInstance"; // ✅ axios with baseURL and token
 
 const HomePage = ({ user }) => {
   const [cases, setCases] = useState([]);
@@ -50,7 +49,7 @@ const HomePage = ({ user }) => {
             <p><strong>Status:</strong> {c.status}</p>
             {c.image && (
               <img
-                src={`http://localhost:5000/uploads/${c.image}`}
+                src={`https://civicpulse1-1.onrender.com/uploads/${c.image}`}
                 alt="Case"
                 className="w-full mt-2 rounded"
               />
